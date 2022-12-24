@@ -12,14 +12,27 @@ import { useEffect, useRef, useState } from "react";
 import { Description } from "@mui/icons-material";
 
 function TicketDialog ({open,toggleTicketDialog,data=null}){
-    const [isNewTicket,setIsNewTicket] = useState(data!=null?false:true);
+  console.log(data);
+    const [isNewTicket,setIsNewTicket] = useState(true);
     const [title,setTitle]=useState("");
     const [description,setDescription]=useState("");
     //const titleRef = useRef();
 
+    useEffect(()=>{
+      if(data!=null){
+        setIsNewTicket(false)
+      setTitle(data.title);
+      setDescription(data.description);
+      }
+    },[data])
+    
     const handleClose = () => {
-       alert("ticket creation attempted");
       //console.log(titleRef.current.value);
+      console.log(title,description);
+      if(isNewTicket)
+      {alert("call create api")}
+      else
+      {alert("call udpate api")}
        toggleTicketDialog();
     }
 

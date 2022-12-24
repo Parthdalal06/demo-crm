@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url) => {
+const useFetch = (url,body,method) => {
 const [data,setData] = useState(null);
-
+const [userDetails,setUserDetails] =useState(localStorage.getItem(""));
 useEffect(()=>{
 fetch(url)
 .then((res)=> res.json())

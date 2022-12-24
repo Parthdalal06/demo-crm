@@ -11,6 +11,7 @@ function DashboardComponent() {
   const [ticketData, setTicketsData] = useState(ticketsData);
   const [isTicketDialogOpen,setIsTicketdialogOpen] = useState(false); 
   const [statusSelected, setStatusSelected] = useState("OPEN");
+  const [selectedTicket,setSelectedTicket] = useState(null);
 
   const handleChange = (event) => {
     setStatusSelected(event.target.value);
@@ -34,7 +35,7 @@ function DashboardComponent() {
   }
   return (
     <Fragment>
-      <TicketDialog open={isTicketDialogOpen} toggleTicketDialog={toggleTicketDialog}/>
+      <TicketDialog open={isTicketDialogOpen} toggleTicketDialog={toggleTicketDialog} data={selectedTicket}/>
       <ToggleButtonGroup
         color='primary'
         value={statusSelected}
@@ -58,7 +59,7 @@ function DashboardComponent() {
         {ticketData
           .filter((ticket) => ticket.status === statusSelected)
           .map((ticket) => {
-            return <TicketCard ticket={ticket} />;
+            return <TicketCard key={ticket.id} ticket={ticket} selectedTicket={(ticket)=>{setSelectedTicket(ticket);toggleTicketDialog()}}/>;
           })}
       </List>
     </Fragment>
